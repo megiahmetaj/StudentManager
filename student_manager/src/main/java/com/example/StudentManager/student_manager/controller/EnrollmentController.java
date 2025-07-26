@@ -27,4 +27,19 @@ public class EnrollmentController {
     public List<StudentResponseDTO> getStudentsForCourse(@PathVariable Long id){
         return enrollmentService.getStudentsForCourse(id);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEnrollment(@PathVariable Long id) {
+        boolean deleted = enrollmentService.deleteEnrollmentById(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/check")
+    public boolean checkEnrollment(@RequestParam Long studentId, @RequestParam Long courseId) {
+        return enrollmentService.isStudentEnrolled(studentId, courseId);
+    }
 }

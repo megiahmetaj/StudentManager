@@ -7,6 +7,8 @@ import com.example.StudentManager.student_manager.repository.CourseRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CourseService {
 
@@ -27,4 +29,7 @@ public class CourseService {
         return new CourseResponseDTO(saved.getId(), saved.getTitle(), saved.getDescription(), saved.getCredits());
     }
 
+    public List<Course> findByCreditsGreaterThan(int min) {
+        return courseRepository.findAll();
+    }
 }
